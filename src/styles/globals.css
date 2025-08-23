@@ -1,0 +1,231 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 14px;
+  /* Light mode (keeping for reference but dark will be default) */
+  --background: #fafafa;
+  --foreground: oklch(0.145 0 0);
+  --card: #ffffff;
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #030213;
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.95 0.0058 264.53);
+  --secondary-foreground: #030213;
+  --muted: #ececf0;
+  --muted-foreground: #717182;
+  --accent: #e9ebef;
+  --accent-foreground: #030213;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --input: transparent;
+  --input-background: #f3f3f5;
+  --switch-background: #cbced4;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: #030213;
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  
+  /* Dark Cyan/Teal color palette for Flint */
+  --dark-cyan-50: #f0fdfa;
+  --dark-cyan-100: #ccfbf1;
+  --dark-cyan-200: #99f6e4;
+  --dark-cyan-300: #5eead4;
+  --dark-cyan-400: #2dd4bf;
+  --dark-cyan-500: #14b8a6;
+  --dark-cyan-600: #0d9488;
+  --dark-cyan-700: #0f766e;
+  --dark-cyan-800: #115e59;
+  --dark-cyan-900: #134e4a;
+  --dark-cyan-950: #042f2e;
+  
+  /* Very dark cyan shades - almost black but with cyan undertones */
+  --flint-black: #051a1a;
+  --flint-dark: #0a2626;
+  --flint-darker: #0f3333;
+  --flint-accent: #14b8a6;
+  --flint-accent-bright: #2dd4bf;
+}
+
+/* Dark mode as default for Flint */
+:root {
+  --background: var(--flint-black);
+  --foreground: #f0fdfa;
+  --card: var(--flint-dark);
+  --card-foreground: #f0fdfa;
+  --popover: var(--flint-darker);
+  --popover-foreground: #f0fdfa;
+  --primary: var(--flint-accent-bright);
+  --primary-foreground: var(--flint-black);
+  --secondary: var(--flint-darker);
+  --secondary-foreground: #ccfbf1;
+  --muted: var(--flint-darker);
+  --muted-foreground: #99f6e4;
+  --accent: var(--flint-darker);
+  --accent-foreground: #f0fdfa;
+  --destructive: #ef4444;
+  --destructive-foreground: #f0fdfa;
+  --border: var(--flint-darker);
+  --input: var(--flint-darker);
+  --input-background: var(--flint-darker);
+  --switch-background: var(--flint-darker);
+  --ring: var(--flint-accent);
+  --chart-1: var(--flint-accent);
+  --chart-2: #2dd4bf;
+  --chart-3: #5eead4;
+  --chart-4: #99f6e4;
+  --chart-5: #ccfbf1;
+  --sidebar: var(--flint-dark);
+  --sidebar-foreground: #f0fdfa;
+  --sidebar-primary: var(--flint-accent);
+  --sidebar-primary-foreground: var(--flint-black);
+  --sidebar-accent: var(--flint-darker);
+  --sidebar-accent-foreground: #ccfbf1;
+  --sidebar-border: var(--flint-darker);
+  --sidebar-ring: var(--flint-accent);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Flint dark cyan colors */
+  --color-flint-black: var(--flint-black);
+  --color-flint-dark: var(--flint-dark);
+  --color-flint-darker: var(--flint-darker);
+  --color-flint-accent: var(--flint-accent);
+  --color-flint-accent-bright: var(--flint-accent-bright);
+  
+  /* Dark cyan scale */
+  --color-dark-cyan-50: var(--dark-cyan-50);
+  --color-dark-cyan-100: var(--dark-cyan-100);
+  --color-dark-cyan-200: var(--dark-cyan-200);
+  --color-dark-cyan-300: var(--dark-cyan-300);
+  --color-dark-cyan-400: var(--dark-cyan-400);
+  --color-dark-cyan-500: var(--dark-cyan-500);
+  --color-dark-cyan-600: var(--dark-cyan-600);
+  --color-dark-cyan-700: var(--dark-cyan-700);
+  --color-dark-cyan-800: var(--dark-cyan-800);
+  --color-dark-cyan-900: var(--dark-cyan-900);
+  --color-dark-cyan-950: var(--dark-cyan-950);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}

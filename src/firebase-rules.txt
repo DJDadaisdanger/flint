@@ -1,0 +1,73 @@
+🔥 FIREBASE FIRESTORE SECURITY RULES FOR FLINT APP
+==================================================
+
+CRITICAL: You MUST apply these rules to your Firebase Console to fix the permission errors.
+
+📍 How to Apply These Rules:
+1. Go to https://console.firebase.google.com/
+2. Select your "flint-5cbda" project  
+3. Click "Firestore Database" in the left sidebar
+4. Click the "Rules" tab at the top
+5. Replace ALL the content with the rules below
+6. Click "Publish" to save the changes
+
+⚠️  IMPORTANT: Without these rules, you'll continue getting "Missing or insufficient permissions" errors!
+
+COPY THE RULES BELOW TO YOUR FIREBASE CONSOLE:
+=====================================================
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Allow users to read and write their own user document
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Allow users to read and write their own subcollections
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Optional: Allow public read access to user profiles (remove if you want full privacy)
+    // match /users/{userId} {
+    //   allow read: if true;
+    //   allow write: if request.auth != null && request.auth.uid == userId;
+    // }
+  }
+}
+
+=====================================================
+
+📋 ADDITIONAL FIREBASE SETUP CHECKLIST:
+
+1. ✅ Apply the Firestore Rules above
+2. ✅ Enable Authentication:
+   - Go to "Authentication" → "Sign-in method"
+   - Enable "Email/Password" provider
+   - Save changes
+
+3. ✅ Optional - Enable Google Sign-in:
+   - In "Sign-in method", also enable "Google" 
+   - This gives users more login options
+
+4. ✅ Test the rules:
+   - After applying rules, try creating a new account in your Flint app
+   - The "Missing permissions" error should be gone
+
+🎯 WHAT THESE RULES DO:
+- Users can only access their own data (privacy-first!)
+- Authenticated users can create, read, update, and delete their own user document
+- No one can access other users' data
+- Perfect for a privacy-first note-taking app like Flint
+
+🔧 TROUBLESHOOTING:
+If you still get permission errors after applying these rules:
+1. Make sure you clicked "Publish" after pasting the rules
+2. Wait 30 seconds for the rules to propagate globally
+3. Try refreshing your Flint app
+4. Check the Firebase Console logs for any rule parsing errors
+
+Once you apply these rules, your Flint app will have full Firebase authentication working! 🚀
