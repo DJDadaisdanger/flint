@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { Button } from "./ui/button";
 import { LogoIllustration } from "./LogoIllustration";
 import { ArrowRight } from "lucide-react";
-import { useAuth } from "./UserDataStore";
+import { useAuth } from "../lib/auth/AuthContext";
 
 /**
  * BACKEND INTEGRATION NOTES:

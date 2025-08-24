@@ -1,11 +1,13 @@
-import { AuthProvider } from './components/UserDataStore';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
 import { FeatureCards } from './components/FeatureCards';
 import { Footer } from './components/Footer';
 import { AuthPages } from './components/AuthPages';
 import { SuccessDialog } from './components/SuccessDialog';
-import { useAuth } from './components/UserDataStore';
+import { useAuth } from './lib/auth/AuthContext';
+import DashboardApp from './modules/App';
+import PrivateRoute from './components/PrivateRoute';
 
 /**
  * BACKEND INTEGRATION NOTES:
@@ -17,13 +19,13 @@ import { useAuth } from './components/UserDataStore';
  * 2. Added SuccessDialog component for user feedback on auth actions
  * 3. Wrapped entire app with AuthProvider for centralized auth state
  * 4. Added global AuthPages component that all "Get Started" buttons trigger
- * 5. All authentication logic is now centralized in UserDataStore.tsx with Firebase
+ * 5. All authentication logic is now centralized in AuthContext with Firebase
  * 6. No more mock authentication - real Firebase integration
  * 
  * FIREBASE AUTHENTICATION FLOW:
  * - ANY "Get Started" button calls openAuth() from useAuth hook
  * - ONE AuthPages modal handles all authentication via Firebase
- * - ONE UserDataStore manages all user data and Firebase API calls
+ * - ONE AuthContext manages all user data and Firebase API calls
  * - Success dialogs show when users register/login successfully
  * - User data is stored in Firestore and synchronized in real-time
  * 
@@ -87,8 +89,8 @@ import { useAuth } from './components/UserDataStore';
  * - Responsive design for all device sizes
  */
 
-// Internal component that uses auth context
-function AppContent() {
+// Landing page component
+function LandingPage() {
   const { isAuthModalOpen, closeAuth, successMessage, clearSuccessMessage } = useAuth();
   
   return (
@@ -123,9 +125,19 @@ function AppContent() {
 
 export default function App() {
   return (
-    // WRAP ENTIRE APP WITH FIREBASE AUTH PROVIDER
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    <Routes>
+      {/* Landing page with auth */}
+      <Route path="/" element={<LandingPage />} />
+      
+      {/* Protected dashboard routes */}
+      <Route path="/dashboard/*" element={
+        <PrivateRoute>
+          <DashboardApp />
+        </PrivateRoute>
+      } />
+      
+      {/* Catch all other routes and redirect to landing */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }

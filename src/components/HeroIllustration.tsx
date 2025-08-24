@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform, useSpring } from 'motion/react';
 import { useEffect } from 'react';
-import logoImage from 'figma:asset/81e588c3016666137cc057962ad813bb962a1dac.png';
+import logoImage from 'figma:asset/logo.png';
 
 export function HeroIllustration() {
   // Mouse position motion values

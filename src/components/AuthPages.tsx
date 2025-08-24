@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Zap } from 'lucide-react';
-import { useAuth } from './UserDataStore';
+import { useAuth } from '../lib/auth/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 interface AuthPagesProps {
   isOpen: boolean;
@@ -18,7 +19,8 @@ interface AuthPagesProps {
  */
 
 export function AuthPages({ isOpen, onClose }: AuthPagesProps) {
-  const { handleLogin, handleRegister, isLoading, error, setError } = useAuth();
+  const { handleLogin, handleRegister, isLoading, error, setError, user } = useAuth();
+  const navigate = useNavigate();
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
@@ -36,6 +38,13 @@ export function AuthPages({ isOpen, onClose }: AuthPagesProps) {
       setError(null);
     }
   }, [isOpen, isLoginMode, setError]);
+
+  // Redirect to dashboard after successful authentication
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [user, navigate]);
 
   const validateForm = () => {
     const errors: {[key: string]: string} = {};
